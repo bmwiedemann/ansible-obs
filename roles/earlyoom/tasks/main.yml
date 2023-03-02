@@ -1,0 +1,15 @@
+---
+  - name: zypper install earlyoom
+    command: 
+      cmd: zypper -n install earlyoom
+      warn: false
+  - name: Copy file with owner and permissions
+    ansible.builtin.copy:
+      src: files/etc-sysconfig-earlyoom
+      dest: /etc/sysconfig/earlyoom
+      owner: root
+      group: root
+      mode: '0644'
+  - name: enable earlyoom
+    command:
+      cmd: systemctl enable --now earlyoom
